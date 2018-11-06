@@ -8,7 +8,8 @@
 		<content>
 			<List
 				id="docList"
-				items="{Attachments>/DocumentSet}">
+				items="{Attachments>/DocumentSet}"
+				updateFinished=".onUpdFinishedMasterList">
 				<headerToolbar>
 					<Toolbar>
 						<SearchField

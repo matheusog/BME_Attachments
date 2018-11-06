@@ -21,7 +21,7 @@ sap.ui.define([
 		
 		onSearchDocument: function(oEvent) {
 			var bClear 		= oEvent.getParameter('clearButtonPressed');
-			var bRefresh 	= oEvent.getParameter('refreshButtonPressed');
+			//var bRefresh 	= oEvent.getParameter('refreshButtonPressed');
 			var sQuery		= oEvent.getParameter('query');
 			
 			if(bClear || !sQuery) {
@@ -36,13 +36,15 @@ sap.ui.define([
 		}, 
 		
 		onPressDocumentList: function(oEvent){
-			var oContext = oEvent.getSource().getBindingContext('Attachments');
-			var oObject = oContext.getObject();
-			
-			this.getRouter().navTo('mainDetail', {
-				idDocumento: oObject.DocNum, 
-				tipoDocumento: oObject.TipoDoc
-			});
+			var oItem = oEvent.getSource();
+			this._itemNavigation(oItem);
+		}, 
+		
+		onUpdFinishedMasterList : function(oEvent) {
+			var oList = oEvent.getSource(); 
+			if(oList.getItems() && oList.getItems().length > 0) {
+				this._itemNavigation(oList.getItems()[0]);
+			}
 		}, 
 		
 		_createViewModel: function() {
@@ -55,17 +57,34 @@ sap.ui.define([
 			this._oList.getBinding('items').filter(oFilter);
 		},
 		
+		_itemNavigation: function(oItem) {
+			var oContext = oItem.getBindingContext('Attachments');
+			var oObject = oContext.getObject();
+			
+			this.getRouter().navTo('mainDetail', {
+				idDocumento: oObject.DocNum, 
+				tipoDocumento: oObject.TipoDoc
+			}, true);
+		}, 
+		
 		_routeMatched : function(oEvent) {
 			var oArguments = oEvent.getParameter('arguments');
 			var oQuery = oArguments["?query"];
 			if(oQuery && oQuery.idDocumento) { 
 				var sDocnum = oQuery.idDocumento;
 				
-				var oModelAtt = this._oComponent.getModel('Attachments');
+				if(oQuery.tipoDocumento) { 
+					var sTipoDoc = oQuery.tipoDocumento;
+				}
+				
+				//var oModelAtt = this._oComponent.getModel('Attachments');
 				
 				this._oViewModel.setProperty('/masterSearch', sDocnum);
 				
 				var aFilters = [(new Filter({path: 'DocNum', operator: FilterOperator.EQ, value1: sDocnum }))];
+				if(sTipoDoc) {
+					aFilters.push(new Filter({path: 'TipoDoc', operator: FilterOperator.EQ, value1: sTipoDoc }));	
+				}
 			
 				var oFilter = 
 					new Filter({

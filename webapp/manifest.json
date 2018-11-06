@@ -61,7 +61,10 @@
 			"tablet": true,
 			"phone": true
 		},
-		"supportedThemes": ["sap_hcb", "sap_belize"],
+		"supportedThemes": [
+			"sap_hcb",
+			"sap_belize"
+		],
 		"fullWidth": true
 	},
 	"sap.ui5": {
@@ -99,9 +102,11 @@
 			}
 		},
 		"resources": {
-			"css": [{
-				"uri": "css/style.css"
-			}]
+			"css": [
+				{
+					"uri": "css/style.css"
+				}
+			]
 		},
 		"routing": {
 			"config": {
@@ -117,15 +122,26 @@
 					"target": "notFound"
 				}
 			},
-			"routes": [{
-				"name": "mainScreen",
-				"pattern": "documents:?query:",
-				"target": ["s1MainScreen", "s1DocList", "empty"]
-			}, {
-				"name": "mainDetail",
-				"pattern": "documents/{idDocumento}&{tipoDocumento}:?sap-iapp-state:",
-				"target": ["s1MainScreen", "s1DocList", "s1DocAttachments"]
-			}],
+			"routes": [
+				{
+					"name": "mainScreen",
+					"pattern": "documents:?query:",
+					"target": [
+						"s1MainScreen",
+						"s1DocList",
+						"empty"
+					]
+				},
+				{
+					"name": "mainDetail",
+					"pattern": "documents/{idDocumento}&{tipoDocumento}:?sap-iapp-state:",
+					"target": [
+						"s1MainScreen",
+						"s1DocList",
+						"s1DocAttachments"
+					]
+				}
+			],
 			"targets": {
 				"s1MainScreen": {
 					"viewId": "s1MainScreen",
