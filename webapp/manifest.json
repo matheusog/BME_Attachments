@@ -1,0 +1,176 @@
+{
+	"_version": "1.5.0",
+	"sap.app": {
+		"id": "braskem.com.bm.zmmbme_attach",
+		"type": "application",
+		"i18n": "i18n/i18n.properties",
+		"applicationVersion": {
+			"version": "1.0.0"
+		},
+		"title": "{{appTitle}}",
+		"description": "{{appDescription}}",
+		"sourceTemplate": {
+			"id": "servicecatalog.connectivityComponent",
+			"version": "0.0.0"
+		},
+		"ach": "MM",
+		"dataSources": {
+			"ZGW_BME_ATTACHMENTS_SRV": {
+				"uri": "/sap/opu/odata/sap/ZGW_BME_ATTACHMENTS_SRV/",
+				"type": "OData",
+				"settings": {
+					"odataVersion": "2.0",
+					"localUri": "localService/metadata.xml"
+				}
+			}
+		},
+		"crossNavigation": {
+			"inbounds": {
+				"intent1": {
+					"signature": {
+						"parameters": {
+							"idDocumento": {
+								"required": true
+							},
+							"tipoDocumento": {
+								"required": true
+							}
+						},
+						"additionalParameters": "allowed"
+					},
+					"semanticObject": "ZMMBMs",
+					"action": "attachment",
+					"title": "{{appTitle}}",
+					"icon": "sap-icon://attachment"
+				}
+			}
+		}
+	},
+	"sap.ui": {
+		"technology": "UI5",
+		"icons": {
+			"icon": "",
+			"favIcon": "",
+			"phone": "",
+			"phone@2": "",
+			"tablet": "",
+			"tablet@2": ""
+		},
+		"deviceTypes": {
+			"desktop": true,
+			"tablet": true,
+			"phone": true
+		},
+		"supportedThemes": ["sap_hcb", "sap_belize"],
+		"fullWidth": true
+	},
+	"sap.ui5": {
+		"rootView": {
+			"viewName": "braskem.com.bm.zmmbme_attach.view.S0_App",
+			"type": "XML",
+			"async": true,
+			"ïd": "appStart"
+		},
+		"dependencies": {
+			"minUI5Version": "1.30.0",
+			"libs": {
+				"sap.ui.core": {},
+				"sap.m": {},
+				"sap.ui.layout": {},
+				"sap.ushell": {}
+			}
+		},
+		"contentDensities": {
+			"compact": true,
+			"cozy": true
+		},
+		"models": {
+			"i18n": {
+				"type": "sap.ui.model.resource.ResourceModel",
+				"settings": {
+					"bundleName": "braskem.com.bm.zmmbme_attach.i18n.i18n"
+				}
+			},
+			"Attachments": {
+				"type": "sap.ui.model.odata.v2.ODataModel",
+				"settings": {},
+				"dataSource": "ZGW_BME_ATTACHMENTS_SRV",
+				"preload": false
+			}
+		},
+		"resources": {
+			"css": [{
+				"uri": "css/style.css"
+			}]
+		},
+		"routing": {
+			"config": {
+				"routerClass": "sap.m.routing.Router",
+				"viewPath": "braskem.com.bm.zmmbme_attach.view",
+				"viewType": "XML",
+				"controlId": "appStart",
+				"controlAggregation": "pages",
+				"clearAggregation": false,
+				"transition": "slide",
+				"async": true,
+				"bypassed": {
+					"target": "notFound"
+				}
+			},
+			"routes": [{
+				"name": "mainScreen",
+				"pattern": "documents:?query:",
+				"target": ["s1MainScreen", "s1DocList", "empty"]
+			}, {
+				"name": "mainDetail",
+				"pattern": "documents/{idDocumento}&{tipoDocumento}:?sap-iapp-state:",
+				"target": ["s1MainScreen", "s1DocList", "s1DocAttachments"]
+			}],
+			"targets": {
+				"s1MainScreen": {
+					"viewId": "s1MainScreen",
+					"viewType": "XML",
+					"viewName": "S1_MainScreen",
+					"viewLevel": 1
+				},
+				"s1DocList": {
+					"parent": "s1MainScreen",
+					"viewId": "s1DocList",
+					"viewType": "XML",
+					"viewName": "S1_DocList",
+					"viewLevel": 1,
+					"controlId": "splitMain",
+					"controlAggregation": "masterPages"
+				},
+				"s1DocAttachments": {
+					"parent": "s1MainScreen",
+					"viewId": "s1DocAttachments",
+					"viewType": "XML",
+					"viewName": "S1_DocAttachments",
+					"viewLevel": 2,
+					"controlId": "splitMain",
+					"controlAggregation": "detailPages"
+				},
+				"empty": {
+					"parent": "s1MainScreen",
+					"viewId": "empty",
+					"viewName": "Empty",
+					"viewType": "XML",
+					"viewLevel": 2,
+					"controlId": "splitMain",
+					"controlAggregation": "detailPages"
+				},
+				"notFound": {
+					"viewId": "notFound",
+					"viewName": "NotFound",
+					"viewType": "XML",
+					"transition": "show"
+				}
+			}
+		}
+	},
+	"sap.platform.abap": {
+		"uri": "/sap/bc/ui5_ui5/sap/zmmbm_attach/webapp",
+		"_version": "1.1.0"
+	}
+}

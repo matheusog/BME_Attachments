@@ -1,0 +1,26 @@
+<edmx:Edmx
+    xmlns:edmx="http://schemas.microsoft.com/ado/2007/06/edmx"
+    xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata"
+    xmlns:sap="http://www.sap.com/Protocols/SAPData" Version="1.0">
+    <edmx:DataServices m:DataServiceVersion="2.0">
+        <Schema
+            xmlns="http://schemas.microsoft.com/ado/2008/09/edm" Namespace="ZGW_BME_ATTACHMENTS_SRV" xml:lang="en" sap:schema-version="0">
+            <EntityType Name="DocumentType" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="DocNum"/>
+                </Key>
+                <Property Name="DocNum" Type="Edm.String" Nullable="false" MaxLength="10" sap:label="Service Authorizatio" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="DocText" Type="Edm.String" Nullable="false" MaxLength="50" sap:label="SA Description" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="TipoDoc" Type="Edm.String" Nullable="false" MaxLength="1" sap:label="Parameter type" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="StatusDoc" Type="Edm.String" Nullable="false" MaxLength="1" sap:label="Status do Documento" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+            </EntityType>
+            <EntityContainer Name="ZGW_BME_ATTACHMENTS_SRV_Entities" m:IsDefaultEntityContainer="true" sap:supported-formats="atom json xlsx">
+                <EntitySet Name="DocumentSet" EntityType="ZGW_BME_ATTACHMENTS_SRV.DocumentType" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:addressable="false" sap:content-version="1"/>
+            </EntityContainer>
+            <atom:link
+                xmlns:atom="http://www.w3.org/2005/Atom" rel="self" href="./sap/ZGW_BME_ATTACHMENTS_SRV/$metadata"/>
+                <atom:link
+                    xmlns:atom="http://www.w3.org/2005/Atom" rel="latest-version" href="./sap/ZGW_BME_ATTACHMENTS_SRV/$metadata"/>
+                </Schema>
+            </edmx:DataServices>
+        </edmx:Edmx>

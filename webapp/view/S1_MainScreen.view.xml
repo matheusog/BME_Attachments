@@ -1,0 +1,6 @@
+<mvc:View xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m"
+	controllerName="braskem.com.bm.zmmbme_attach.controller.S1_MainScreen" xmlns:html="http://www.w3.org/1999/xhtml">
+	<SplitContainer id="splitMain">
+		
+	</SplitContainer>
+</mvc:View>

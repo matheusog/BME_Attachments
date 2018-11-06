@@ -1,0 +1,46 @@
+<mvc:View 
+	xmlns:core="sap.ui.core" 
+	xmlns:mvc="sap.ui.core.mvc" 
+	xmlns="sap.m"
+	controllerName="braskem.com.bm.zmmbme_attach.controller.S1_DocList" 
+	xmlns:html="http://www.w3.org/1999/xhtml">
+	<Page id="masterPage" title="{i18n>s1MasterTitle}">
+		<content>
+			<List
+				id="docList"
+				items="{Attachments>/DocumentSet}">
+				<headerToolbar>
+					<Toolbar>
+						<SearchField
+							id="masterSearch"
+							search=".onSearchDocument"
+							value="{master>/masterSearch}"
+						/>
+					</Toolbar>
+				</headerToolbar>
+				<items>
+					<ObjectListItem
+						press=".onPressDocumentList"
+						title="{Attachments>TipoDocText} {Attachments>DocNum}"
+						type="Active"
+						>
+						<firstStatus>
+							<ObjectStatus 
+								text="{
+									path: 'Attachments>StatusDocText'
+								}"
+								state="{
+									path: 'Attachments>StatusDoc', 
+									formatter: '.oFormatter.formatStateStatus'
+								}" />
+						</firstStatus>
+						<secondStatus></secondStatus>
+						<attributes>
+							<ObjectAttribute text="{Attachments>DocText}" />
+						</attributes>
+					</ObjectListItem>
+				</items>
+			</List>
+		</content>
+	</Page>
+</mvc:View>

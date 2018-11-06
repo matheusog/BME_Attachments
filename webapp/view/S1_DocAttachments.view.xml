@@ -1,0 +1,59 @@
+<mvc:View 
+	xmlns:core="sap.ui.core" 
+	xmlns:mvc="sap.ui.core.mvc" 
+	xmlns="sap.m"
+	controllerName="braskem.com.bm.zmmbme_attach.controller.S1_DocAttachments" 
+	xmlns:html="http://www.w3.org/1999/xhtml">
+	<Page id="detailPage" title="{Attachments>DocNum}">
+		<content>
+			<UploadCollection
+				id="attachList"
+				multiple="false"
+				uploadUrl="{detail>/uploadUrl}"
+				uploadEnabled="{= ${detail>/statusDoc} === ${statusDoc>/STATUS_PENDENTE} }"
+				instantUpload="true"
+				mode="MultiSelect"
+				selectionChange=".onSelectionChange"
+				change=".onUploadChange"
+				uploadComplete=".onUploadComplete"
+				beforeUploadStarts=".onBeforeUploadStarts"
+				fileDeleted=".onFileDeleted"
+				sameFilenameAllowed="false"
+				>
+				<toolbar>
+					<OverflowToolbar>
+						<Title id="attachmentTitle" />
+						<ToolbarSpacer />
+						<Button
+							id="deleteButton"
+							text="{i18n>s2DeleteButtonText}"
+							icon="sap-icon://delete"
+							press=".onDeleteItem"
+							enabled="{= ${detail>/selectedItems} > 0 &amp;&amp; ${detail>/statusDoc} === ${statusDoc>/STATUS_PENDENTE}}"
+							type="Transparent" />
+						<Button
+							id="downloadButton"
+							text="{i18n>s2DownloadButtonText}"
+							icon="sap-icon://download"
+							press=".onDownloadItem"
+							enabled="{= ${detail>/selectedItems} > 0 }"
+							type="Transparent" />
+						<UploadCollectionToolbarPlaceholder/>
+					</OverflowToolbar>
+				</toolbar>
+				<!--
+				items="{path: 'Attachments>/AttachmentSet'}"
+				<items>
+					<UploadCollectionItem
+						fileName="{Attachments>FileName}"
+						mimeType="{Attachments>MimeType}"
+						enableEdit="false"
+						visibleEdit="false"
+						>
+					</UploadCollectionItem>
+				</items>
+				-->
+			</UploadCollection>
+		</content>
+	</Page>
+</mvc:View>
